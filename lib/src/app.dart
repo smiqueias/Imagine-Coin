@@ -1,3 +1,4 @@
+import 'package:cryptocurrency_app/src/core/app_colors.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/app_routers.dart';
@@ -12,6 +13,11 @@ class App extends StatelessWidget {
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Imagine Coin",
+        theme: ThemeData(
+          primaryColor: AppColors.grey2,
+          primarySwatch: Colors.grey,
+          scaffoldBackgroundColor: AppColors.grey2,
+        ),
         initialRoute: AppRouters.initialRoute,
         onGenerateRoute: AppRouters.generateRoutes,
       ),
