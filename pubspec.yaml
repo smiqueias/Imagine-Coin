@@ -29,11 +29,14 @@ dependencies:
   ###
   google_fonts: ^2.1.0
   dio: ^4.0.1
+  intl: ^0.17.0
+  equatable: ^2.0.3
 
   ###
   # State Management
   ###
-  flutter_riverpod: ^0.14.0+3
+  flutter_bloc: ^7.3.0
+  bloc: ^7.2.1
 
   ###
   # UI
@@ -67,13 +70,8 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

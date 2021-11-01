@@ -17,6 +17,7 @@ class App extends StatelessWidget {
           primaryColor: AppColors.grey2,
           primarySwatch: Colors.grey,
           scaffoldBackgroundColor: AppColors.grey2,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         initialRoute: AppRouters.initialRoute,
         onGenerateRoute: AppRouters.generateRoutes,

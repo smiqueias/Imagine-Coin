@@ -12,7 +12,6 @@ class CoinRepository implements ICoinRepository {
   Future<CoinModel> fetchCoins() async {
     try {
       final response = await _dioService.getDio().get("assets/search?base=BRL");
-      print(response.data);
       return CoinModel.fromJson(response.data);
     } catch (e, st) {
       developer.log(

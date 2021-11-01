@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import 'i_dio_service.dart';
 
 class DioService implements IDioService {

@@ -1,10 +1,13 @@
 import 'package:cryptocurrency_app/src/core/app_colors.dart';
 import 'package:cryptocurrency_app/src/core/app_text_styles.dart';
+import 'package:cryptocurrency_app/src/features/coin_list/model/coin_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoinListScreen extends StatelessWidget {
-  const CoinListScreen({Key? key}) : super(key: key);
+  final CoinModel coinModel;
+
+  const CoinListScreen({Key? key, required this.coinModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +39,9 @@ class CoinListScreen extends StatelessWidget {
                       "Cotação",
                       style: AppTextStyles.heading18,
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 18.w),
-                      child: Text(
-                        "24h",
-                        style: AppTextStyles.heading18,
-                      ),
+                    Text(
+                      "24h",
+                      style: AppTextStyles.heading18,
                     ),
                   ],
                 ),
@@ -49,8 +49,17 @@ class CoinListScreen extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: coinModel.data.length,
                   itemBuilder: (context, index) {
+                    var percentChangeInDay =
+                        (coinModel.data[index].latestPrice.percentChange.day! *
+                                100)
+                            .toStringAsFixed(1);
+
+                    var latestPrice =
+                        double.tryParse(coinModel.data[index].latest)!
+                            .toStringAsFixed(2);
+
                     return GestureDetector(
                       onLongPress: () => {},
                       child: Container(
@@ -65,6 +74,7 @@ class CoinListScreen extends StatelessWidget {
                           ),
                         ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
                               margin: EdgeInsets.only(left: 12.w),
@@ -74,31 +84,36 @@ class CoinListScreen extends StatelessWidget {
                                 color: AppColors.grey4,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
-                                Icons.coronavirus_outlined,
-                                color: Colors.amber,
+                              child: Image.network(
+                                coinModel.data[index].imageUrl,
                               ),
                             ),
                             SizedBox(
                               width: 8.w,
                             ),
                             Text(
-                              "Bitcoin (BTC)",
+                              coinModel.data[index].name,
                               style: AppTextStyles.text18,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             SizedBox(
                               width: 12.w,
                             ),
                             Text(
-                              "R\$ 354.787,00",
+                              "R\$$latestPrice",
                               style: AppTextStyles.text18,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             SizedBox(
                               width: 60.w,
                             ),
-                            Text(
-                              "-1.57%",
-                              style: AppTextStyles.text18Orange,
+                            Container(
+                              margin: EdgeInsets.only(right: 4.w),
+                              child: Text(
+                                "$percentChangeInDay%",
+                                style: AppTextStyles.text18Orange,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
