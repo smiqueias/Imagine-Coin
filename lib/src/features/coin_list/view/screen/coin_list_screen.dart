@@ -3,11 +3,14 @@ import 'package:cryptocurrency_app/src/core/app_text_styles.dart';
 import 'package:cryptocurrency_app/src/features/coin_list/model/coin_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class CoinListScreen extends StatelessWidget {
   final CoinModel coinModel;
 
-  const CoinListScreen({Key? key, required this.coinModel}) : super(key: key);
+  CoinListScreen({Key? key, required this.coinModel}) : super(key: key);
+
+  final NumberFormat real = NumberFormat.currency(locale: "pt_BR", name: "R\$");
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +60,7 @@ class CoinListScreen extends StatelessWidget {
                             .toStringAsFixed(1);
 
                     var latestPrice =
-                        double.tryParse(coinModel.data[index].latest)!
-                            .toStringAsFixed(2);
+                        double.tryParse(coinModel.data[index].latest)!;
 
                     return GestureDetector(
                       onLongPress: () => {},
@@ -100,7 +102,7 @@ class CoinListScreen extends StatelessWidget {
                               width: 12.w,
                             ),
                             Text(
-                              "R\$$latestPrice",
+                              real.format(latestPrice),
                               style: AppTextStyles.text18,
                               overflow: TextOverflow.ellipsis,
                             ),
