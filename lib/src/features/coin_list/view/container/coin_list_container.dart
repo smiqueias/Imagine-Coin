@@ -23,6 +23,7 @@ class CoinListContainer extends StatelessWidget {
             } else if (state is CoinCubitLoaded) {
               return CoinListScreen(
                 coinModel: state.coinModel,
+                state: context.read<CoinCubit>(),
               );
             } else if (state is CoinCubitError) {
               return const Text("Error");
