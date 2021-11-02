@@ -1,4 +1,4 @@
-import 'package:cryptocurrency_app/src/features/coin_list/cubit/coincubit_cubit.dart';
+import 'package:cryptocurrency_app/src/features/coin_list/cubit/coin_cubit.dart';
 import 'package:cryptocurrency_app/src/features/coin_list/repository/coin_repository.dart';
 import 'package:cryptocurrency_app/src/features/coin_list/service/dio_service.dart';
 import 'package:cryptocurrency_app/src/features/coin_list/view/screen/coin_list_screen.dart';
