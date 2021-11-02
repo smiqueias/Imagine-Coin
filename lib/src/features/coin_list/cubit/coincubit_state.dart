@@ -1,4 +1,4 @@
-part of 'coincubit_cubit.dart';
+part of 'coin_cubit.dart';
 
 abstract class CoinCubitState extends Equatable {
   const CoinCubitState();
