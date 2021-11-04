@@ -15,4 +15,14 @@ class AppTextStyles {
     color: AppColors.orange2,
     fontSize: 18,
   );
+
+  static final errorTextStyle = GoogleFonts.passionOne(
+    color: AppColors.white,
+    fontSize: 20,
+  );
+
+  static final errorTextStyleButton = GoogleFonts.passionOne(
+    color: AppColors.white,
+    fontSize: 20,
+  );
 }

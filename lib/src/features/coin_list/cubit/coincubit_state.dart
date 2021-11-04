@@ -25,10 +25,10 @@ class CoinCubitLoaded extends CoinCubitState {
 }
 
 class CoinCubitError extends CoinCubitState {
-  final String _errorMessage;
+  final String errorMessage;
 
-  const CoinCubitError(this._errorMessage);
+  const CoinCubitError(this.errorMessage);
 
   @override
-  List<Object> get props => [_errorMessage];
+  List<Object> get props => [errorMessage];
 }
