@@ -5,39 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class CoinListScreen extends StatefulWidget {
-  final ICoinListVM vieModel;
-
-  const CoinListScreen({Key? key, required this.vieModel}) : super(key: key);
-
-  @override
-  State<CoinListScreen> createState() => _CoinListScreenState();
-}
-
-class _CoinListScreenState extends State<CoinListScreen> {
+class CoinListScreen extends StatelessWidget {
+  final ICoinListVM viewModel;
+  final Future<void> Function() onRefresh;
   final NumberFormat real = NumberFormat.currency(locale: "pt_BR", name: "R\$");
 
-  final _selected = [];
+  CoinListScreen({Key? key, required this.viewModel, required this.onRefresh})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: _selected.isNotEmpty
+      appBar: viewModel.selectedCoins.isNotEmpty
           ? AppBar(
-              title: Text("${_selected.length} Selecionada(s)"),
+              title: Text("${viewModel.selectedCoins.length} Selecionada(s)"),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  setState(() {
-                    _selected.clear();
-                  });
+                  viewModel.clear();
                 },
               ),
             )
           : null,
-      floatingActionButton: _selected.isNotEmpty
+      floatingActionButton: viewModel.selectedCoins.isNotEmpty
           ? FloatingActionButton.extended(
               onPressed: () {},
               icon: const Icon(
@@ -85,25 +77,26 @@ class _CoinListScreenState extends State<CoinListScreen> {
               ),
               Expanded(
                 child: RefreshIndicator(
-                  onRefresh: () => widget.vieModel.fetchCoins(),
+                  onRefresh: onRefresh,
                   child: ListView.builder(
-                    itemCount: widget.vieModel.coin.data.length,
+                    itemCount: viewModel.coin.data.length,
                     itemBuilder: (context, index) {
-                      var percentChangeInDay = (widget.vieModel.coin.data[index]
+                      var percentChangeInDay = (viewModel.coin.data[index]
                                   .latestPrice.percentChange.day! *
                               100)
                           .toStringAsFixed(1);
 
-                      var latestPrice = double.tryParse(
-                          widget.vieModel.coin.data[index].latest)!;
+                      var latestPrice =
+                          double.tryParse(viewModel.coin.data[index].latest)!;
 
                       return GestureDetector(
                         onLongPress: () => {
-                          (_selected.contains(widget.vieModel.coin.data[index]))
-                              ? _selected
-                                  .remove(widget.vieModel.coin.data[index])
-                              : _selected.add(widget.vieModel.coin.data[index]),
-                          setState(() {})
+                          (viewModel.selectedCoins
+                                  .contains(viewModel.coin.data[index]))
+                              ? viewModel.removeSelectedCoin(
+                                  viewModel.coin.data[index])
+                              : viewModel
+                                  .addSelectedCoin(viewModel.coin.data[index])
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(
@@ -111,8 +104,8 @@ class _CoinListScreenState extends State<CoinListScreen> {
                           height: 83.h,
                           width: 399.w,
                           decoration: BoxDecoration(
-                            color: (_selected
-                                    .contains(widget.vieModel.coin.data[index]))
+                            color: (viewModel.selectedCoins
+                                    .contains(viewModel.coin.data[index]))
                                 ? AppColors.orange2.withOpacity(0.1)
                                 : AppColors.grey1,
                             borderRadius: BorderRadius.circular(
@@ -130,22 +123,21 @@ class _CoinListScreenState extends State<CoinListScreen> {
                                   color: AppColors.grey4,
                                   shape: BoxShape.circle,
                                 ),
-                                child: (_selected.contains(
-                                        widget.vieModel.coin.data[index]))
+                                child: (viewModel.selectedCoins
+                                        .contains(viewModel.coin.data[index]))
                                     ? const Icon(
                                         Icons.check,
                                         color: AppColors.orange,
                                       )
                                     : Image.network(
-                                        widget
-                                            .vieModel.coin.data[index].imageUrl,
+                                        viewModel.coin.data[index].imageUrl,
                                       ),
                               ),
                               SizedBox(
                                 width: 8.w,
                               ),
                               Text(
-                                widget.vieModel.coin.data[index].name,
+                                viewModel.coin.data[index].name,
                                 style: AppTextStyles.text18,
                                 overflow: TextOverflow.ellipsis,
                               ),

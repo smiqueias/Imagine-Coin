@@ -17,7 +17,10 @@ class CoinListContainer extends StatelessWidget {
           } else if (viewModel.isError) {
             return CoinListErrorScreen(vieModel: viewModel);
           }
-          return CoinListScreen(vieModel: viewModel);
+          return CoinListScreen(
+            viewModel: viewModel,
+            onRefresh: () => viewModel.fetchCoins(),
+          );
         },
       ),
     );

@@ -8,8 +8,12 @@ abstract class ICoinListVM extends ChangeNotifier {
   bool get isLoading;
   bool get isError;
   String get errorMessage;
-  Future<void> fetchCoins();
+  List<Data> get selectedCoins;
   CoinModel get coin;
+  Future<void> fetchCoins();
+  void addSelectedCoin(Data coin);
+  void removeSelectedCoin(Data coin);
+  void clear();
 }
 
 class CoinListVM extends ChangeNotifier implements ICoinListVM {
@@ -24,8 +28,13 @@ class CoinListVM extends ChangeNotifier implements ICoinListVM {
 
   late CoinModel _coin;
 
+  final List<Data> _selectedCoins = [];
+
   @override
   CoinModel get coin => _coin;
+
+  @override
+  List<Data> get selectedCoins => _selectedCoins;
 
   @override
   String get errorMessage => _errorMessage;
@@ -68,5 +77,23 @@ class CoinListVM extends ChangeNotifier implements ICoinListVM {
     } finally {
       _setLoading();
     }
+  }
+
+  @override
+  void addSelectedCoin(Data coin) {
+    _selectedCoins.add(coin);
+    notifyListeners();
+  }
+
+  @override
+  void removeSelectedCoin(Data coin) {
+    _selectedCoins.remove(coin);
+    notifyListeners();
+  }
+
+  @override
+  void clear() {
+    _selectedCoins.clear();
+    notifyListeners();
   }
 }
