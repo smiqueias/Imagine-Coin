@@ -1,6 +1,8 @@
-import 'package:cryptocurrency_app/src/core/app_colors.dart';
+import 'package:cryptocurrency_app/src/core/app_theme.dart';
+import 'package:cryptocurrency_app/src/core/providers.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'core/app_routers.dart';
 
 class App extends StatelessWidget {
@@ -10,17 +12,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(428, 926),
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Imagine Coin",
-        theme: ThemeData(
-          primaryColor: AppColors.grey2,
-          primarySwatch: Colors.grey,
-          scaffoldBackgroundColor: AppColors.grey2,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+      builder: () => MultiProvider(
+        providers: AppProviders.providers,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Imagine Coin",
+          theme: AppTheme.appTheme,
+          initialRoute: AppRouters.initialRoute,
+          onGenerateRoute: AppRouters.generateRoutes,
         ),
-        initialRoute: AppRouters.initialRoute,
-        onGenerateRoute: AppRouters.generateRoutes,
       ),
     );
   }

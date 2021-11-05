@@ -1,10 +1,10 @@
-import 'package:cryptocurrency_app/src/features/coin_list/model/coin_model.dart';
-import 'package:cryptocurrency_app/src/features/coin_list/repository/i_coin_repository.dart';
-import 'package:cryptocurrency_app/src/features/coin_list/service/dio_service.dart';
+import 'package:cryptocurrency_app/src/features/coin-list/model/coin_model.dart';
+import 'package:cryptocurrency_app/src/features/coin-list/repository/i_coin_repository.dart';
+import 'package:cryptocurrency_app/src/features/coin-list/service/i_dio_service.dart';
 import 'dart:developer' as developer;
 
 class CoinRepository implements ICoinRepository {
-  final DioService _dioService;
+  final IDioService _dioService;
 
   CoinRepository(this._dioService);
 

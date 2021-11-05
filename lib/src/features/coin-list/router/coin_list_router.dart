@@ -1,4 +1,4 @@
-import 'package:cryptocurrency_app/src/features/coin_list/view/container/coin_list_container.dart';
+import 'package:cryptocurrency_app/src/features/coin-list/view/container/coin_list_container.dart';
 import 'package:flutter/material.dart';
 
 class CoinListRouter extends StatelessWidget {
