@@ -1,5 +1,4 @@
-import 'package:cryptocurrency_app/src/features/coin_list/router/coin_list_router.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cryptocurrency_app/src/features/coin-list/router/coin_list_router.dart';
 import 'package:flutter/material.dart';
 
 class AppRouters {

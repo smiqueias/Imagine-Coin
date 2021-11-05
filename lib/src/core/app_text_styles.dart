@@ -1,3 +1,4 @@
+import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
@@ -24,5 +25,15 @@ class AppTextStyles {
   static final errorTextStyleButton = GoogleFonts.passionOne(
     color: AppColors.white,
     fontSize: 20,
+  );
+
+  static final appBarTextStyle = GoogleFonts.passionOne(
+    color: AppColors.white,
+    fontSize: 20,
+  );
+  static final floatingActionButtonTextStyle = GoogleFonts.passionOne(
+    color: AppColors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
   );
 }
