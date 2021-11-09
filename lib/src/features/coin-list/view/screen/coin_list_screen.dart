@@ -156,7 +156,10 @@ class CoinListScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(right: 4.w),
                                 child: Text(
                                   "$percentChangeInDay%",
-                                  style: AppTextStyles.text18Orange,
+                                  style: (double.tryParse(percentChangeInDay)! >
+                                          0.0)
+                                      ? AppTextStyles.text18Green
+                                      : AppTextStyles.text18Orange,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),

@@ -17,6 +17,11 @@ class AppTextStyles {
     fontSize: 18,
   );
 
+  static final text18Green = GoogleFonts.passionOne(
+    color: AppColors.green,
+    fontSize: 18,
+  );
+
   static final errorTextStyle = GoogleFonts.passionOne(
     color: AppColors.white,
     fontSize: 20,
