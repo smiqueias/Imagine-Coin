@@ -1,14 +1,17 @@
 import 'package:cryptocurrency_app/src/core/app_colors.dart';
 import 'package:cryptocurrency_app/src/core/app_text_styles.dart';
 import 'package:cryptocurrency_app/src/features/coin-list/view-model/coinlist_vm.dart';
+import 'package:cryptocurrency_app/src/features/favorites/view-model/favorites_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/src/provider.dart';
 
 class CoinListScreen extends StatelessWidget {
   final ICoinListVM viewModel;
   final Future<void> Function() onRefresh;
   final NumberFormat real = NumberFormat.currency(locale: "pt_BR", name: "R\$");
+  late IFavoritesVM favoritesVM;
 
   CoinListScreen({Key? key, required this.viewModel, required this.onRefresh})
       : super(key: key);
@@ -16,6 +19,7 @@ class CoinListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    favoritesVM = context.watch<IFavoritesVM>();
 
     return Scaffold(
       appBar: viewModel.selectedCoins.isNotEmpty
@@ -31,7 +35,11 @@ class CoinListScreen extends StatelessWidget {
           : null,
       floatingActionButton: viewModel.selectedCoins.isNotEmpty
           ? FloatingActionButton.extended(
-              onPressed: () {},
+              onPressed: () {
+                favoritesVM.addFavorite(viewModel.selectedCoins);
+                viewModel.clear();
+                print(favoritesVM.favorites.length);
+              },
               icon: const Icon(
                 Icons.favorite,
                 color: AppColors.orange2,
