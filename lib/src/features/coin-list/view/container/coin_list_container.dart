@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 class CoinListContainer extends StatelessWidget {
   const CoinListContainer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

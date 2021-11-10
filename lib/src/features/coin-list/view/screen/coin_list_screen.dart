@@ -90,6 +90,11 @@ class CoinListScreen extends StatelessWidget {
                           double.tryParse(viewModel.coin.data[index].latest)!;
 
                       return GestureDetector(
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          "/coin-detail",
+                          arguments: viewModel.coin.data[index],
+                        ),
                         onLongPress: () => {
                           (viewModel.selectedCoins
                                   .contains(viewModel.coin.data[index]))
