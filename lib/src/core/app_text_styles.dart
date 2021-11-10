@@ -7,6 +7,12 @@ class AppTextStyles {
     color: AppColors.white,
     fontSize: 18,
   );
+
+  static final heading26 = GoogleFonts.passionOne(
+    color: AppColors.white,
+    fontSize: 26,
+  );
+
   static final text18 = GoogleFonts.passionOne(
     color: AppColors.grey3,
     fontSize: 18,

@@ -20,5 +20,10 @@ class AppTheme {
       splashColor: AppColors.orange2,
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.grey2,
+      selectedItemColor: AppColors.orange2,
+      unselectedItemColor: AppColors.grey3,
+    ),
   );
 }
